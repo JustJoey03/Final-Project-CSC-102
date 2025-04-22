@@ -3,7 +3,7 @@ import threading
 from tkinter import *
 import tkinter
 from bomb_configs import COUNTDOWN, NUM_PHASES, NUM_STRIKES
-from PIL import Image, ImageTk
+#from PIL import Image, ImageTk
 
 class BombGUI :
     def __init__(self):
@@ -13,16 +13,17 @@ class BombGUI :
         self.root.configure(cursor='none')
 
         # Get screen dimensions for proper sizing
-        root = tkinter.Tk()
-        screen_width = root.winfo_screenwidth()
-        screen_height = root.winfo_screenheight()
+        #root = tkinter.Tk()
+        #screen_width = root.winfo_screenwidth()
+        #screen_height = root.winfo_screenheight()
 
         # Resizing image
-        image = Image.open("panel.png")
-        resized_image = image.resize((screen_width, screen_height))
-        self.bg_photo = ImageTk.PhotoImage(resized_image)
+        #image = Image.open("panel.png")
+        #resized_image = image.resize((screen_width, screen_height))
+        #self.bg_photo = ImageTk.PhotoImage(resized_image)
     
         # Load background panel (bomb) using Tkinter
+        self.bg_photo = PhotoImage(file="panel.png")
         self.canvas = Canvas(self.root,
                              width=self.bg_photo.width(),
                              height=self.bg_photo.height())
