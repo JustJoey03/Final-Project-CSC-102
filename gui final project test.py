@@ -7,12 +7,12 @@ from bomb_configs import COUNTDOWN, NUM_PHASES, NUM_STRIKES
 class BombGUI :
     def __init__(self):
         self.root = Tk()
-        self.root.attributes('-fullscreen', True)
-        self.root.geometry('800x480')  
+        #self.root.attributes('-fullscreen', True)
+        self.root.geometry('1024x576')  
         self.root.configure(cursor='none')
     
         # Load background panel (bomb) using Tkinter
-        self.bg_photo = PhotoImage(file="panel1920.png")
+        self.bg_photo = PhotoImage(file="panel_notbombmonitor.png")
         self.canvas = Canvas(self.root,
                              width=self.bg_photo.width(),
                              height=self.bg_photo.height())
