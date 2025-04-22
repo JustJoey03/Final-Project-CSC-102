@@ -3,7 +3,6 @@ import threading
 from tkinter import *
 import tkinter
 from bomb_configs import COUNTDOWN, NUM_PHASES, NUM_STRIKES
-from PIL import Image, ImageTk
 
 class BombGUI :
     def __init__(self):
