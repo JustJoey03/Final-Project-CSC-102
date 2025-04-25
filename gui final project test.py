@@ -2,10 +2,24 @@ import os
 import threading
 from tkinter import *
 import tkinter
+import pygame  # Import pygame for audio
 from bomb_configs import COUNTDOWN, NUM_PHASES, NUM_STRIKES
 
 class BombGUI :
     def __init__(self):
+        # Initialize pygame mixer for audio
+        pygame.mixer.init()
+
+        # Load audio files
+        self.timer_sound = pygame.mixer.Sound('timer.mp3')
+        self.final_countdown_alarm = pygame.mixer.Sound('final_countdown_alarm.mp3')
+        self.win_applause = pygame.mixer.Sound('win_applause.mp3')
+        self.lose_explosion = pygame.mixer.Sound('lose_explosion.mp3')
+
+        # Start playing the timer sound loop
+        self.timer_sound.play(loops=-1, maxtime=0)  # Loop the timer sound indefinitely
+        
+        
         self.root = Tk()
         #self.root.attributes('-fullscreen', True)
         self.root.geometry('1024x576')  
@@ -44,6 +58,11 @@ class BombGUI :
             self.timer_text,
             text=f'{mins:02d}:{secs:02d}'
         )
+        
+        if self.time_left == 10:
+            # Stop the timer sound and play the final countdown alarm
+            self.timer_sound.stop()
+            self.final_countdown_alarm.play()
 
         if self.time_left > 0:
             self.time_left -= 1
@@ -52,6 +71,12 @@ class BombGUI :
             self._blow_up()
 
     def _blow_up(self):
+        # Stop all sounds except for the lose explosion
+        self.timer_sound.stop()
+        self.final_countdown_alarm.stop()
+        self.lose_explosion.play()
+        
+        
         self.canvas.delete('all')
         self.canvas.create_text(
             self.bg_photo.width() // 2,
@@ -59,6 +84,13 @@ class BombGUI :
             text='💥 BOOM! 💥', font=('Impact', 72),
             fill='red', anchor=CENTER
         )
+        
+    def win(self):
+        # Stop all sounds and play the win applause
+        self.timer_sound.stop()
+        self.final_countdown_alarm.stop()
+        self.lose_explosion.stop()
+        self.win_applause.play()
 
 if __name__ == '__main__':
     BombGUI()
