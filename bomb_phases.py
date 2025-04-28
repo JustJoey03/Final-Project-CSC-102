@@ -20,9 +20,25 @@ import sys
 # the LCD display GUI
 class Lcd(Frame):
     def __init__(self, window):
-        super().__init__(window, bg="black")
-        # make the GUI fullscreen
-        window.attributes("-fullscreen", True)
+        super().__init__(window, bg='black')
+        self.root = window
+
+        #self.root.geometry('1024x576')  
+        self.root.configure(cursor='none')
+        window.attributes("-fullscreen", True) # Fullscreen
+        
+        # Load background panel (bomb) using Tkinter
+        self.bg_photo = PhotoImage(file="panel_notbombmonitor.png")
+
+        self.canvas = Canvas(self.root,
+                             width=self.bg_photo.width(),
+                             height=self.bg_photo.height())
+        self.canvas.pack(fill=BOTH, expand=TRUE)
+        
+        self.canvas.create_image(0, 0, anchor=NW, image=self.bg_photo) # Bomb picture
+
+        self.boot_text = self.canvas.create_text(50, 50, anchor=NW, text="Text example here", font=("Courier New", 20), fill="white", justify=LEFT) # Text just for placement preview
+
         # we need to know about the timer (7-segment display) to be able to pause/unpause it
         self._timer = None
         # we need to know about the pushbutton to turn off its LED when the program exits
