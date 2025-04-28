@@ -56,7 +56,7 @@ class BombGUI:
             anchor=NW
         )
         # Removes the boot screen after 3 seconds
-        self.root.after(3000, lambda: self.canvas.delete(self.boot_text_id))
+        #self.root.after(3000, lambda: self.canvas.delete(self.boot_text_id))
         # ───────────────────────────────────────────────
 
         # Live timer text
