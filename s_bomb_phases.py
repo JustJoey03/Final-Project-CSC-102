@@ -334,6 +334,6 @@ class Toggles(PhaseThread):
     # returns the toggle switches state as a string
     def __str__(self):
         if self._defused:
-            return f"DEFUSED (Binary: {self._binary_str})"
+            return "DEFUSED"
         else:
-            return f"Current Value: {self._value} (Binary: {bin(self._value)[2:].zfill(4)})"
+            return f"{self._value}, {bin(self._value)[2:].zfill(4)}"
