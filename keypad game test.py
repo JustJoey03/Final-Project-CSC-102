@@ -1,12 +1,9 @@
 #Keypad Memory Trap Game: A memory puzzle where players press keys in the right order over several stages.
 
 import random
-from bomb_configs import keypad_keys, NUM_PHASES, NUM_STRIKES
-import bomb_phases  
-import bomb
-import sleep
-import component_keypad
-from time
+from time import sleep
+
+from bomb_configs import keypad_keys, NUM_PHASES, NUM_STRIKES, component_keypad
 
 #Collapse the 2D keypad grid into a single list of symbols for easy use
 def flatten_keypad(keys):
