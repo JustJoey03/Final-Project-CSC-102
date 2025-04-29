@@ -13,6 +13,7 @@ from threading import Thread
 from time import sleep
 import os
 import sys
+import pygame  # Additional import for handling audio
 
 #########
 # classes
@@ -119,6 +120,11 @@ class Lcd(Frame):
         # the quit button
         self._bquit = tkinter.Button(self, bg="red", fg="white", font=("Courier New", 18), text="Quit", anchor=CENTER, command=self.quit)
         self._bquit.grid(row=1, column=2, pady=40)
+        
+        if success:
+            self.win_applause.play()  # Play applause when successfully defused
+        else:
+            self.lose_explosion.play()  # Play explosion sound when failed
 
     # re-attempts the bomb (after an explosion or a successful defusion)
     def retry(self):
@@ -169,20 +175,42 @@ class Timer(PhaseThread):
         self._sec = ""
         # by default, each tick is 1 second
         self._interval = 1
+        
+        # Initialize pygame mixer for audio playback
+        pygame.mixer.init()
+        # Load audio files
+        self.timer_sound = pygame.mixer.Sound("timer.mp3")
+        self.final_countdown_alarm = pygame.mixer.Sound("final_countdown_alarm.mp3")
+        self.lose_explosion = pygame.mixer.Sound("lose_explosion.mp3")
+        self.win_applause = pygame.mixer.Sound("win_applause.mp3")
+        
+        # Temporary flag to signal when to stop the timer sound
+        self.timer_sound_playing = False
 
     # runs the thread
     def run(self):
         self._running = True
+        self.timer_sound.play(loops=-1)  # Start playing timer sound on loop
+        
         while (self._running):
             if (not self._paused):
                 # update the timer and display its value on the 7-segment display
                 self._update()
                 self._component.print(str(self))
-                # wait 1s (default) and continue
-                sleep(self._interval)
+                
+                # Check for countdown audio effects
+                if self._value == 10 and not self.timer_sound_playing:
+                    self.final_countdown_alarm.play()  # Play final countdown alarm
+                    self.timer_sound_playing = True  # Prevent replaying the countdown alarm
+                    
+                
                 # the timer has expired -> phase failed (explode)
                 if (self._value == 0):
+                    self.timer_sound.stop()  # Stop the timer sound
+                    self.lose_explosion.play()  # Play explosion sound
                     self._running = False
+                    # wait 1s (default) and continue
+                sleep(self._interval)
                 self._value -= 1
             else:
                 sleep(0.1)
@@ -198,6 +226,11 @@ class Timer(PhaseThread):
         self._paused = not self._paused
         # blink the 7-segment display when paused
         self._component.blink_rate = (2 if self._paused else 0)
+        if self._paused:
+            self.timer_sound.stop()  # Stop playing sound when paused
+        else:
+            if self._value > 0:  # Only restart if there's time left
+                self.timer_sound.play(loops=-1)
 
     # returns the timer as a string (mm:ss)
     def __str__(self):
