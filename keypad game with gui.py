@@ -5,7 +5,7 @@
 import tkinter as tk
 from tkinter import messagebox
 import random
-from bomb_configs import keypad_keys, NUM_PHASES, NUM_STRIKES
+from bomb_configs import component_keys, NUM_PHASES, NUM_STRIKES
 
 class KeypadMemoryTrapGUI(tk.Tk):
     def __init__(self):
