@@ -347,16 +347,26 @@ class Button(PhaseThread):
 class Toggles(PhaseThread):
     def __init__(self, component, target, name="Toggles"):
         super().__init__(name, component, target)
+        self._value = 0  # Initialize the toggle state
+        self._binary_str = ""
 
     # runs the thread
     def run(self):
-        # TODO
-        pass
+        self._running = True
+        while self._running:
+            # Check the state of the toggle switches
+            self._value = sum(1 << i for i, pin in enumerate(self._component) if pin.value)  # Calculate the binary value
+
+            # Check if the toggle value matches the target
+            if self._value == self._target:
+                self._defused = True
+                self._running = False
+                self._binary_str = bin(self._value)[2:].zfill(4)  # store binary string for display
+            sleep(0.1)
 
     # returns the toggle switches state as a string
     def __str__(self):
-        if (self._defused):
+        if self._defused:
             return "DEFUSED"
         else:
-            # TODO
-            pass
+            return f"{self._value}, {bin(self._value)[2:].zfill(4)}"
