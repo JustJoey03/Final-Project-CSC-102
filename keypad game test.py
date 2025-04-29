@@ -3,7 +3,10 @@
 import random
 from bomb_configs import keypad_keys, NUM_PHASES, NUM_STRIKES
 import bomb_phases  
-import bomb         
+import bomb
+import sleep
+import component_keypad
+from time
 
 #Collapse the 2D keypad grid into a single list of symbols for easy use
 def flatten_keypad(keys):
