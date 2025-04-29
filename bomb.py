@@ -180,7 +180,9 @@ def turn_off():
 
 # initialize the LCD GUI
 window = Tk()
+window.title("Bomb Defusal")
 gui = Lcd(window)
+
 
 # initialize the bomb strikes and active phases (i.e., not yet defused)
 strikes_left = NUM_STRIKES
