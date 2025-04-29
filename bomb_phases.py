@@ -284,11 +284,11 @@ class Keypad(PhaseThread):
 
 # the jumper wires phase
 class Wires(PhaseThread):
-    """
-    PhaseThread that reads five GPIO pins (your jumper wires),
-    builds a bit-string from them, and defuses when that integer
-    matches the configured wires_target.
-    """
+    
+    #PhaseThread that reads five GPIO pins (your jumper wires),
+    #builds a bit-string from them, and defuses when that integer
+    #matches the configured wires_target.
+    
     def __init__(self, component, target, name="Wires"):
         super().__init__(name, component, target)
         # will hold e.g. "10110"
@@ -298,20 +298,20 @@ class Wires(PhaseThread):
         self._running = True
         # continuously poll the five pins
         while self._running:
-            # build a list of '0' or '1' strings from each pin.value
+            # builds a list of 0 or 1 strings from each pin.value
             bits = [str(int(pin.value)) for pin in self._component]
             self._value = "".join(bits)               # e.g. "10011"
-            # compare the binary→int to the target
-            if int(self._value, 2) == self._target:
+            # compare the binary and int to the target
+            if not self._defused and int(self._value, 2) == self._target:
                 self._defused = True
-                self._running = False
+                
             sleep(0.1)
 
-    def __str__(self):
+    def __str__(self): 
         # once defused, show DEFUSED
         if self._defused:
             return "DEFUSED"
-        # otherwise show the live bits and their decimal
+        # otherwise it shows the bits and their decimals
         return f"{self._value} (= {int(self._value, 2)})"
 
 # the pushbutton phase

@@ -89,20 +89,7 @@ def check_phases():
             # reset the keypad
             keypad._failed = False
             keypad._value = ""
-    # check the wires
-    if (wires._running):
-        # update the GUI
-        gui._lwires["text"] = f"Wires: {wires}"
-        # the phase is defused -> stop the thread
-        if (wires._defused):
-            wires._running = False
-            active_phases -= 1
-        # the phase has failed -> strike
-        elif (wires._failed):
-            strike()
-            # reset the wires
-            wires._failed = False
-    # check the button
+   
     if (button._running):
         # update the GUI
         gui._lbutton["text"] = f"Button: {button}"
@@ -116,19 +103,19 @@ def check_phases():
             # reset the button
             button._failed = False
     # check the toggles
-    if (toggles._running):
-        gui._ltoggles["text"] = f"Toggles: {toggles}"
-        if (toggles._defused):
-            toggles._running = False
-            active_phases -= 1
-            gui._ltoggles["text"] = "Toggles: DEFUSED" # Change text to defused one last time
-    elif toggles._defused:
-        gui._ltoggles["text"] = "Toggles: DEFUSED" # Keep defused text on-screen if it is defused
-    # the phase has failed -> strike
-    elif (toggles._failed):
-        strike()
-        # reset the toggles
-        toggles._failed = False
+        if (toggles._running):
+            gui._ltoggles["text"] = f"Toggles: {toggles}"
+            if (toggles._defused):
+                toggles._running = False
+                active_phases -= 1
+                gui._ltoggles["text"] = "Toggles: DEFUSED" # Change text to defused one last time
+        elif toggles._defused:
+            gui._ltoggles["text"] = "Toggles: DEFUSED" # Keep defused text on-screen if it is defused
+        # the phase has failed -> strike
+        elif (toggles._failed):
+            strike()
+            # reset the toggles
+            toggles._failed = False
 
     # note the strikes on the GUI
     gui._lstrikes["text"] = f"Strikes left: {strikes_left}"

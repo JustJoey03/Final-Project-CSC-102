@@ -46,7 +46,7 @@ if (RPi):
 
     component_keypad = Matrix_Keypad(keypad_rows, keypad_cols, keypad_keys)
 
-# jumper wires
+# jumper 
 # 10 pins: 14, 15, 18, 23, 24, 3V3, 3V3, 3V3, 3V3, 3V3
 #          -------JUMP1------  ---------JUMP2---------
 # the jumper wire pins
@@ -231,7 +231,7 @@ boot_text = f"Booting...\n\x00\x00"\
             f"*Kernel v3.1.4-159 loaded.\n"\
             f"Initializing subsystems...\n\x00"\
             f"*System model: 102BOMBv4.2\n"\
-            f"*Serial number: {serial}\n"\
+            f"*Serial number: {serial}\n"\	
             f"Encrypting keypad...\n\x00"\
             f"*Keyword: {cipher_keyword}; key: {rot}\n"\
             f"*{' '.join(ascii_uppercase)}\n"\
