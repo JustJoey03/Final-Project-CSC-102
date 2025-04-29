@@ -116,13 +116,14 @@ def check_phases():
             # reset the button
             button._failed = False
     # check the toggles
-    if (toggles._running):
-        # update the GUI
-        gui._ltoggles["text"] = f"Toggles: {toggles}"
-        # the phase is defused -> stop the thread
-        if (toggles._defused):
-            toggles._running = False
-            active_phases -= 1
+        if (toggles._running):
+            gui._ltoggles["text"] = f"Toggles: {toggles}"
+            if (toggles._defused):
+                toggles._running = False
+                active_phases -= 1
+                gui._ltoggles["text"] = "Toggles: DEFUSED"
+        elif toggles._defused:
+            gui._ltoggles["text"] = "Toggles: DEFUSED"
         # the phase has failed -> strike
         elif (toggles._failed):
             strike()

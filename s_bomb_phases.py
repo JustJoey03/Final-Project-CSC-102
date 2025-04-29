@@ -315,6 +315,7 @@ class Toggles(PhaseThread):
     def __init__(self, component, target, name="Toggles"):
         super().__init__(name, component, target)
         self._value = 0  # Initialize the toggle state
+        self._binary_str = ""
 
     # runs the thread
     def run(self):
@@ -325,8 +326,9 @@ class Toggles(PhaseThread):
 
             # Check if the toggle value matches the target
             if self._value == self._target:
-                self._defused = True  # Mark as defused
-                self._running = False  # Stop the thread
+                self._defused = True
+                self._running = False
+                self._binary_str = bin(self._value)[2:].zfill(4)  # store binary string for display
             sleep(0.1)
 
     # returns the toggle switches state as a string
@@ -334,4 +336,4 @@ class Toggles(PhaseThread):
         if self._defused:
             return "DEFUSED"
         else:
-            return f"Current Value: {self._value} (Binary: {bin(self._value)[2:]})"
+            return f"{self._value}, {bin(self._value)[2:].zfill(4)}"
