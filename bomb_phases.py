@@ -4,6 +4,9 @@
 # Team: 
 #################################
 
+# Import the configs (to get NUM_STRIKES)
+from bomb_configs import NUM_STRIKES  # Import NUM_STRIKES from bomb_configs.py
+
 # import the configs
 from bomb_configs import *
 # other imports
@@ -209,6 +212,11 @@ class Timer(PhaseThread):
                     self.timer_sound.stop()  # Stop the timer sound
                     self.lose_explosion.play()  # Play explosion sound
                     self._running = False
+                    # Check for game over (e.g., player lost)
+                    if NUM_STRIKES == 0:
+                        self.lose_explosion.play()  # Play lose sound
+                    sleep(1)
+
                     # wait 1s (default) and continue
                 sleep(self._interval)
                 self._value -= 1
