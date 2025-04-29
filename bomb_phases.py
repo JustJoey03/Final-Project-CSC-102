@@ -355,7 +355,8 @@ class Toggles(PhaseThread):
         self._running = True
         while self._running:
             # Check the state of the toggle switches
-            self._value = sum(1 << i for i, pin in enumerate(self._component) if pin.value)  # Calculate the binary value
+            num_toggles = len(self._component)
+            self._value = sum(1 << (num_toggles - 1 - i) for i, pin in enumerate(self._component) if pin.value)  # Calculate the binary value
 
             # Check if the toggle value matches the target
             if self._value == self._target:
