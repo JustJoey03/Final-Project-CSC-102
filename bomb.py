@@ -123,7 +123,7 @@ def check_phases():
                 active_phases -= 1
                 gui._ltoggles["text"] = "Toggles: DEFUSED" # Change text to defused one last time
         elif toggles._defused:
-            gui._ltoggles["text"] = "Toggles: DEFUSED" # Keep it saying defused if its defuse
+            gui._ltoggles["text"] = "Toggles: DEFUSED" # Keep defused text on-screen if it is defused
         # the phase has failed -> strike
         elif (toggles._failed):
             strike()
