@@ -188,7 +188,7 @@ def genKeypadCombination():
     cipher_keyword = encrypt(keyword, rot)
     combination = digits(passphrase)
 
-    return keypad_target, keypad_answer = genKeypadCombination()
+    keypad_target, keypad_answer = genKeypadCombination()
 
 
 ###############################
