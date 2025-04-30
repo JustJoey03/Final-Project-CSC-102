@@ -267,8 +267,10 @@ class Keypad(PhaseThread):
                     sleep(0.1)
                 # log the key
                 self._value += str(key)
+                
+                gui._lkeypad["text"] = f"Hex: {self._target} → Decimal: {self._value}"
                 # the combination is correct -> phase defused
-                if (self._value == self._target):
+                if len(self._value == len(self._target):
                     self._defused = True
                 # the combination is incorrect -> phase failed (strike)
                 elif (len(self._value) >= len(self._target)):
