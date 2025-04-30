@@ -1,7 +1,7 @@
 #################################
 # CSC 102 Defuse the Bomb Project
 # Main program
-# Team: 
+# Team:
 #################################
 
 # import the configs
@@ -37,7 +37,7 @@ def bootup(n=0):
 # sets up the phase threads
 def setup_phases():
     global timer, keypad, wires, button, toggles
-    
+   
     # setup the timer thread
     timer = Timer(component_7seg, COUNTDOWN)
     # bind the 7-segment display to the LCD GUI so that it can be paused/unpaused from the GUI
@@ -63,7 +63,7 @@ def setup_phases():
 # checks the phase threads
 def check_phases():
     global active_phases
-    
+   
     # check the timer
     if (timer._running):
         # update the GUI
@@ -141,7 +141,7 @@ def check_phases():
 # handles a strike
 def strike():
     global strikes_left
-    
+   
     # note the strike
     strikes_left -= 1
 

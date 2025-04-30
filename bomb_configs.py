@@ -1,13 +1,13 @@
 #################################
 # CSC 102 Defuse the Bomb Project
 # Configuration file
-# Team: 
+# Team:
 #################################
 
 # constants
 DEBUG = True        # debug mode?
 RPi = True        # is this running on the RPi?
-ANIMATE = True     # animate the LCD text?
+ANIMATE = False     # animate the LCD text?
 SHOW_BUTTONS = True # show the Pause and Quit buttons on the main LCD GUI?
 COUNTDOWN = 300      # the initial bomb countdown value (seconds)
 NUM_STRIKES = 5      # the total strikes allowed before the bomb "explodes"
@@ -46,7 +46,7 @@ if (RPi):
 
     component_keypad = Matrix_Keypad(keypad_rows, keypad_cols, keypad_keys)
 
-# jumper 
+# jumper
 # 10 pins: 14, 15, 18, 23, 24, 3V3, 3V3, 3V3, 3V3, 3V3
 #          -------JUMP1------  ---------JUMP2---------
 # the jumper wire pins
@@ -102,7 +102,7 @@ def genSerial():
     # Randomly choose number of digits (3/4/5)
     num_digits = randint(3, 5)
     print("num_digits", num_digits)
-    
+   
     remaining = toggle_value
 
     for i in range(num_digits):
@@ -118,7 +118,7 @@ def genSerial():
             d = remaining
         else:
             d = randint(0, max_digit)
-        
+       
         serial_digits.append(d)
         remaining -= d
 
@@ -166,7 +166,7 @@ serial, toggles_target, wires_target = genSerial()
 #  rot: the key to decrypt the keyword
 #  keypad_target: the keypad phase defuse value (combination)
 #  passphrase: the target plaintext passphrase
-keyword, cipher_keyword, rot, keypad_target, passphrase = genKeypadCombination()
+keypad_target, keypad_answer = genKeypadCombination()
 
 # generate the color of the pushbutton (which determines how to defuse the phase)
 button_color = choice(["R", "G", "B"])
@@ -199,4 +199,3 @@ boot_text = (
     f"*{' '.join([str(n % 10) for n in range(26)])}\n"
     f"Rendering phases...\x00"
 )
-

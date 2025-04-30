@@ -1,7 +1,7 @@
 #################################
 # CSC 102 Defuse the Bomb Project
 # GUI and Phase class definitions
-# Team: 
+# Team:
 #################################
 
 # Import the configs (to get NUM_STRIKES)
@@ -24,7 +24,7 @@ import pygame  # Additional import for handling audio
 # the LCD display GUI
 class Lcd(Frame):
     def __init__(self, window):
-        
+       
         super().__init__(window, bg='black')
         #self.bg_photo = PhotoImage(file="panel_notbombmonitor.png")
         #self.bg_label = Label(self, image=self.bg_photo)
@@ -123,7 +123,7 @@ class Lcd(Frame):
         # the quit button
         self._bquit = tkinter.Button(self, bg="red", fg="white", font=("Courier New", 18), text="Quit", anchor=CENTER, command=self.quit)
         self._bquit.grid(row=1, column=2, pady=40)
-        
+       
         if success:
             self.win_applause.play()  # Play applause when successfully defused
         else:
@@ -178,7 +178,7 @@ class Timer(PhaseThread):
         self._sec = ""
         # by default, each tick is 1 second
         self._interval = 1
-        
+       
         # Initialize pygame mixer for audio playback
         pygame.mixer.init()
         # Load audio files
@@ -186,7 +186,7 @@ class Timer(PhaseThread):
         self.final_countdown_alarm = pygame.mixer.Sound("final_countdown_alarm.mp3")
         self.lose_explosion = pygame.mixer.Sound("lose_explosion.mp3")
         self.win_applause = pygame.mixer.Sound("win_applause.mp3")
-        
+       
         # Temporary flag to signal when to stop the timer sound
         self.timer_sound_playing = False
 
@@ -194,19 +194,19 @@ class Timer(PhaseThread):
     def run(self):
         self._running = True
         self.timer_sound.play(loops=-1)  # Start playing timer sound on loop
-        
+       
         while (self._running):
             if (not self._paused):
                 # update the timer and display its value on the 7-segment display
                 self._update()
                 self._component.print(str(self))
-                
+               
                 # Check for countdown audio effects
                 if self._value == 10 and not self.timer_sound_playing:
                     self.final_countdown_alarm.play()  # Play final countdown alarm
                     self.timer_sound_playing = True  # Prevent replaying the countdown alarm
-                    
-                
+                   
+               
                 # the timer has expired -> phase failed (explode)
                 if (self._value == 0):
                     self.timer_sound.stop()  # Stop the timer sound
@@ -267,10 +267,9 @@ class Keypad(PhaseThread):
                     sleep(0.1)
                 # log the key
                 self._value += str(key)
-                
-                gui._lkeypad["text"] = f"Hex: {self._target} → Decimal: {self._value}"
+           
                 # the combination is correct -> phase defused
-                if len(self._value == len(self._target):
+                if len(self._value) == len(self._target):
                     self._defused = True
                 # the combination is incorrect -> phase failed (strike)
                 elif (len(self._value) >= len(self._target)):
@@ -286,11 +285,11 @@ class Keypad(PhaseThread):
 
 # the jumper wires phase
 class Wires(PhaseThread):
-    
+   
     #PhaseThread that reads five GPIO pins (your jumper wires),
     #builds a bit-string from them, and defuses when that integer
     #matches the configured wires_target.
-    
+   
     def __init__(self, component, target, name="Wires"):
         super().__init__(name, component, target)
         # will hold e.g. "10110"
@@ -306,10 +305,10 @@ class Wires(PhaseThread):
             # compare the binary and int to the target
             if not self._defused and int(self._value, 2) == self._target:
                 self._defused = True
-                
+               
             sleep(0.1)
 
-    def __str__(self): 
+    def __str__(self):
         # once defused, show DEFUSED
         if self._defused:
             return "DEFUSED"
