@@ -292,7 +292,7 @@ class Wires(PhaseThread):
    
     def __init__(self, component, target, name="Wires"):
         super().__init__(name, component, target)
-        # will hold e.g. "10110"
+      
         self._value = ""
 
     def run(self):
