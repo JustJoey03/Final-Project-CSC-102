@@ -6,7 +6,7 @@
 
 # constants
 DEBUG = True        # debug mode?
-RPi = True         # is this running on the RPi?
+RPi = True        # is this running on the RPi?
 ANIMATE = True     # animate the LCD text?
 SHOW_BUTTONS = True # show the Pause and Quit buttons on the main LCD GUI?
 COUNTDOWN = 300      # the initial bomb countdown value (seconds)
