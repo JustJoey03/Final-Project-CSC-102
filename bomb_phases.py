@@ -269,10 +269,10 @@ class Keypad(PhaseThread):
                 self._value += str(key)
            
                 # the combination is correct -> phase defused
-                if len(self._value) == len(self._target):
+                if self._value == self._target
                     self._defused = True
                 # the combination is incorrect -> phase failed (strike)
-                elif (len(self._value) >= len(self._target)):
+                elif len(self._value) >= len(self._target):
                     self._failed = True
             sleep(0.1)
 
