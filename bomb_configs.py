@@ -148,46 +148,6 @@ def genKeypadCombination():
 
     return hex_code, decimal_value
 
-    # returns the keypad digits that correspond to the passphrase
-    def digits(passphrase):
-        combination = ""
-        keys = [ None, None, "ABC", "DEF", "GHI", "JKL", "MNO", "PRS", "TUV", "WXY" ]
-
-        # process each character of the keyword
-        for c in passphrase:
-            for i, k in enumerate(keys):
-                if (k and c in k):
-                    # map each character to its digit equivalent
-                    combination += str(i)
-
-        return combination
-
-    # the list of keywords and matching passphrases
-    keywords = { "BANDIT": "RIVER",\
-                 "BUCKLE": "FADED",\
-                 "CANOPY": "FOXES",\
-                 "DEBATE": "THROW",\
-                 "FIERCE": "TRICK",\
-                 "GIFTED": "CYCLE",\
-                 "IMPACT": "STOLE",\
-                 "LONELY": "TOADY",\
-                 "MIGHTY": "ALOOF",\
-                 "NATURE": "CARVE",\
-                 "REBORN": "CLIMB",\
-                 "RECALL": "FEIGN",\
-                 "SYSTEM": "LEAVE",\
-                 "TAKING": "SPINY",\
-                 "WIDELY": "BOUND",\
-                 "ZAGGED": "YACHT" }
-    # the rotation cipher key
-    rot = randint(1, 25)
-
-    # pick a keyword and matching passphrase
-    keyword, passphrase = choice(list(keywords.items()))
-    # encrypt the passphrase and get its combination
-    cipher_keyword = encrypt(keyword, rot)
-    combination = digits(passphrase)
-
     keypad_target, keypad_answer = genKeypadCombination()
 
 
