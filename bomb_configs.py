@@ -139,15 +139,14 @@ def genSerial():
 
 # generates the keypad combination from a keyword and rotation key
 def genKeypadCombination():
-    # encrypts a keyword using a rotation cipher
-    def encrypt(keyword, rot):
-        cipher = ""
+    from random import choice
 
-        # encrypt each letter of the keyword using rot
-        for c in keyword:
-            cipher += chr((ord(c) - 65 + rot) % 26 + 65)
+    # Choose a random hex value
+    hex_values = ["1F", "3A", "2C", "FF", "B4", "A0", "C3", "4D"]
+    hex_code = choice(hex_values)
+    decimal_value = str(int(hex_code, 16))  # Convert to decimal as a string
 
-        return cipher
+    return hex_code, decimal_value
 
     # returns the keypad digits that correspond to the passphrase
     def digits(passphrase):
@@ -189,7 +188,8 @@ def genKeypadCombination():
     cipher_keyword = encrypt(keyword, rot)
     combination = digits(passphrase)
 
-    return keyword, cipher_keyword, rot, combination, passphrase
+    return keypad_target, keypad_answer = genKeypadCombination()
+
 
 ###############################
 # generate the bomb's specifics
@@ -223,7 +223,7 @@ if (DEBUG):
     print(f"Serial number: {serial}")
     print(f"Toggles target: {bin(toggles_target)[2:].zfill(4)}/{toggles_target}")
     print(f"Wires target: {bin(wires_target)[2:].zfill(5)}/{wires_target}")
-    print(f"Keypad target: {keypad_target}/{passphrase}/{keyword}/{cipher_keyword}(rot={rot})")
+    print(f"Keypad target: {keypad_target} (Hex) → {keypad_answer} (Decimal)")
     print(f"Button target: {button_target}")
 
 # set the bomb's LCD bootup text

@@ -78,7 +78,7 @@ def check_phases():
     # check the keypad
     if (keypad._running):
         # update the GUI
-        gui._lkeypad["text"] = f"Combination: {keypad}"
+        gui._lkeypad["text"] = f"Convert HEX {keypad_target} → Decimal: {keypad}"
         # the phase is defused -> stop the thread
         if (keypad._defused):
             keypad._running = False
