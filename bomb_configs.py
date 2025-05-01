@@ -195,7 +195,7 @@ boot_text = (
     f"*Serial number: {serial}\n"
     f"Encrypting keypad...\n\x00"
     f"*Hex challenge: {keypad_target}\n"
-    f"*{' '.join(ascii_uppercase)}\n"
-    f"*{' '.join([str(n % 10) for n in range(26)])}\n"
+    #f"*{' '.join(ascii_uppercase)}\n"
+    #f"*{' '.join([str(n % 10) for n in range(26)])}\n"
     f"Rendering phases...\x00"
 )
