@@ -4,6 +4,8 @@
 # Team:
 #################################
 
+from tkinter import Tk, Button, messagebox
+from tkinter.ttk import Progressbar
 # import the configs
 from bomb_configs import *
 # import the phases
@@ -12,6 +14,32 @@ from bomb_phases import *
 ###########
 # functions
 ###########
+
+# Visual Effects: Progress Bar for Timer
+def create_timer_progress():
+    progress = Progressbar(window, orient="horizontal", length=200, mode="determinate")
+    progress.grid(row=1, column=0)
+
+    def update_progress():
+        progress["value"] = (timer.time_left / COUNTDOWN) * 100
+        window.after(1000, update_progress)
+
+    window.after(1000, update_progress)
+
+# Exit/Quit Confirmation
+def confirm_exit():
+    if messagebox.askyesno("Exit", "Are you sure you want to quit?"):
+        window.quit()
+
+# Game Over Animation (Bomb Exploded)
+def game_over():
+    gui._lscroll["text"] = "Game Over! The bomb exploded!"
+    window.config(bg="red")  # Change background color to red
+
+# Defuse Success Animation
+def game_won():
+    gui._lscroll["text"] = "Congratulations! You defused the bomb!"
+    window.config(bg="green")  # Change background color to green
 
 # generates the bootup sequence on the LCD
 def bootup(n=0):
