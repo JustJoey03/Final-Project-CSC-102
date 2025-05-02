@@ -60,7 +60,7 @@ def check_phases():
 
     # check the keypad
     if (keypad._running):
-        gui._lkeypad["text"] = f"Convert HEX {keypad_target} → Decimal: {keypad}"
+        gui._lkeypad["text"] = f"{keypad_target} → {keypad}"
         if (keypad._defused):
             keypad._running = False
             active_phases -= 1
