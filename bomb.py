@@ -97,7 +97,7 @@ def check_phases():
 
     # check the keypad
     if (keypad._running):
-        gui._lkeypad["text"] = f"Convert HEX {keypad_target} → Decimal: {keypad}"
+        gui._lkeypad["text"] = f"Keypad: {keypad_target} → {keypad}"
         if (keypad._defused):
             keypad._running = False
             active_phases -= 1
@@ -109,7 +109,8 @@ def check_phases():
     # check the wires
     if (wires._running):
         signed_target = wires._target if wires._target < 16 else wires._target - 32
-        gui._lwires["text"] = f"Wires: {wires} | Target: {bin(wires._target)[2:].zfill(5)} (= {signed_target})"
+        #gui._lwires["text"] = f"Wires: {wires} | Target: {bin(wires._target)[2:].zfill(5)} (= {signed_target})"
+        gui._lwires["text"] = f"Wires: {wires} | Target: {signed_target}"
         if (wires._defused):
             wires._running = False
             active_phases -= 1
