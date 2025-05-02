@@ -26,6 +26,15 @@ def create_timer_progress():
 
     window.after(1000, update_progress)
 
+# Update timer display and color
+def update_timer():
+    if timer._running:
+        if timer.time_left <= 10:
+            gui._ltimer["fg"] = "red"  # Change color when time is running low
+        else:
+            gui._ltimer["fg"] = "black"  # Reset color
+        gui._ltimer["text"] = f"Time left: {timer}"
+
 # Exit/Quit Confirmation
 def confirm_exit():
     if messagebox.askyesno("Exit", "Are you sure you want to quit?"):
