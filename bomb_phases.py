@@ -115,6 +115,10 @@ class Lcd(Frame):
         if (SHOW_BUTTONS):
             self._bpause.destroy()
             self._bquit.destroy()
+            
+        # Create and display the "Game Over" label
+        self._lgameover = tkinter.Label(self, text="Game Over" if not success else "You Win!", fg="red", font=("Courier New", 30, "bold"))
+        self._lgameover.grid(row=0, column=1, pady=20)
 
         # reconfigure the GUI
         # the retry button
