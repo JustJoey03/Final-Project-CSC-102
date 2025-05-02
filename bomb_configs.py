@@ -107,7 +107,9 @@ def genKeypadCombination():
 
 # generate Two's Complement wires target
 def generate_twos_complement_target():
-    value = randint(-16, 15)
+    value = 0
+    while value == 0:
+        value = randint(-16, 15)
     if value < 0:
         value = (1 << 5) + value
     return value
