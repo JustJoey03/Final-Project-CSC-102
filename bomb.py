@@ -4,8 +4,6 @@
 # Team:
 #################################
 
-from tkinter import Tk, Button, messagebox
-from tkinter.ttk import Progressbar
 # import the configs
 from bomb_configs import *
 # import the phases
@@ -14,41 +12,6 @@ from bomb_phases import *
 ###########
 # functions
 ###########
-
-# Visual Effects: Progress Bar for Timer
-def create_timer_progress():
-    progress = Progressbar(window, orient="horizontal", length=200, mode="determinate")
-    progress.grid(row=1, column=0)
-
-    def update_progress():
-        progress["value"] = (timer.time_left / COUNTDOWN) * 100
-        window.after(1000, update_progress)
-
-    window.after(1000, update_progress)
-
-# Update timer display and color
-def update_timer():
-    if timer._running:
-        if timer.time_left <= 10:
-            gui._ltimer["fg"] = "red"  # Change color when time is running low
-        else:
-            gui._ltimer["fg"] = "black"  # Reset color
-        gui._ltimer["text"] = f"Time left: {timer}"
-
-# Exit/Quit Confirmation
-def confirm_exit():
-    if messagebox.askyesno("Exit", "Are you sure you want to quit?"):
-        window.quit()
-
-# Game Over Animation (Bomb Exploded)
-def game_over():
-    gui._lscroll["text"] = "Game Over! The bomb exploded!"
-    window.config(bg="red")  # Change background color to red
-
-# Defuse Success Animation
-def game_won():
-    gui._lscroll["text"] = "Congratulations! You defused the bomb!"
-    window.config(bg="green")  # Change background color to green
 
 # generates the bootup sequence on the LCD
 def bootup(n=0):
@@ -97,7 +60,7 @@ def check_phases():
 
     # check the keypad
     if (keypad._running):
-        gui._lkeypad["text"] = f"Keypad: {keypad_target} → {keypad}"
+        gui._lkeypad["text"] = f"Convert HEX {keypad_target} → Decimal: {keypad}"
         if (keypad._defused):
             keypad._running = False
             active_phases -= 1
@@ -109,8 +72,7 @@ def check_phases():
     # check the wires
     if (wires._running):
         signed_target = wires._target if wires._target < 16 else wires._target - 32
-        #gui._lwires["text"] = f"Wires: {wires} | Target: {bin(wires._target)[2:].zfill(5)} (= {signed_target})"
-        gui._lwires["text"] = f"Wires: {wires} | Target: {signed_target}"
+        gui._lwires["text"] = f"Wires: {wires} | Target: {bin(wires._target)[2:].zfill(5)} (= {signed_target})"
         if (wires._defused):
             wires._running = False
             active_phases -= 1
