@@ -183,8 +183,5 @@ gui = Lcd(window)
 strikes_left = NUM_STRIKES
 active_phases = NUM_PHASES
 
-# Call the function to create the timer progress bar
-create_timer_progress()
-
 gui.after(1000, bootup)
 window.mainloop()
