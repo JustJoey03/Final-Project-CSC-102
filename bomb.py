@@ -183,5 +183,11 @@ gui = Lcd(window)
 strikes_left = NUM_STRIKES
 active_phases = NUM_PHASES
 
+# Call the function to create the timer progress bar
+create_timer_progress()
+
+# Call the function for the quit confirmation (hook it to the window's close button)
+window.protocol("WM_DELETE_WINDOW", confirm_exit)
+
 gui.after(1000, bootup)
 window.mainloop()
