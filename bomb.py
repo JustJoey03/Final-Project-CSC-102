@@ -106,12 +106,12 @@ def check_phases():
     gui._lstrikes["text"] = f"Strikes left: {strikes_left}"
     if (strikes_left == 0):
         turn_off()
-        gui.after(1000, gui.conclusion, False)
+        gui.after(1000, gui.conclusion, False) # False indicates failure
         return
 
     if (active_phases == 0):
         turn_off()
-        gui.after(100, gui.conclusion, True)
+        gui.after(100, gui.conclusion, True) # True indicates success
         return
 
     gui.after(100, check_phases)
@@ -133,6 +133,14 @@ def turn_off():
     component_7seg.fill(0)
     for pin in button._rgb:
         pin.value = True
+        
+# Function to display the conclusion message based on success or failure
+def conclusion(success):
+    if success:
+        gui._lscroll["text"] = "Congratulations you deactivated the bomb!"
+    else:
+        gui._lscroll["text"] = "You died lol!"
+    gui._lscroll.update()
 
 ######
 # MAIN

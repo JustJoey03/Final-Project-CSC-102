@@ -390,9 +390,9 @@ class Toggles(PhaseThread):
                 self._running = False
             sleep(0.1)
 
-    # returns the toggle switches state as a string
+        # the toggle switches state as a string
     def __str__(self):
         if self._defused:
             return "DEFUSED"
         else:
-            return f"{bin(self._value)[2:].zfill(4)}" # Show the current binary value
+            return f"{self._value} (= {bin(self._value)})"  # Show the current value in decimal and binary
