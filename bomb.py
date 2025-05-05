@@ -136,14 +136,6 @@ def turn_off():
     if timer._running:  # If the timer is still running, stop it
         timer.stop()  # Call the stop method to ensure the timer stops completely
         
-# Function to display the conclusion message based on success or failure
-def conclusion(success):
-    if success:
-        gui._lscroll["text"] = "Congratulations you deactivated the bomb!"
-    else:
-        gui._lscroll["text"] = "You died lol!"
-    gui._lscroll.update()
-
 ######
 # MAIN
 ######
