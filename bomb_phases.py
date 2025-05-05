@@ -182,6 +182,7 @@ class Timer(PhaseThread):
         self._sec = ""
         # by default, each tick is 1 second
         self._interval = 1
+        self.timer_sound_playing = False
        
         # Initialize pygame mixer for audio playback
         pygame.mixer.init()
@@ -243,6 +244,11 @@ class Timer(PhaseThread):
         else:
             if self._value > 0:  # Only restart if there's time left
                 self.timer_sound.play(loops=-1)
+                
+    def stop(self):  # New method to stop the timer
+        self._running = False
+        self.timer_sound.stop()  # Stop timer sound immediately
+        self._component.fill(0)  # Turn off the 7-segment display
 
     # returns the timer as a string (mm:ss)
     def __str__(self):

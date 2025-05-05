@@ -133,6 +133,8 @@ def turn_off():
     component_7seg.fill(0)
     for pin in button._rgb:
         pin.value = True
+    if timer._running:  # If the timer is still running, stop it
+        timer.stop()  # Call the stop method to ensure the timer stops completely
         
 # Function to display the conclusion message based on success or failure
 def conclusion(success):
