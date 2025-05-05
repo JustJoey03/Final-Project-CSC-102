@@ -395,4 +395,4 @@ class Toggles(PhaseThread):
         if self._defused:
             return "DEFUSED"
         else:
-            return f"{self._value} (= {bin(self._value)})"  # Show the current value in decimal and binary
+            return f"{bin(self._value)[2:].zfill(4)}" # Show the current binary value
