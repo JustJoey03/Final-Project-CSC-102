@@ -119,6 +119,9 @@ class Lcd(Frame):
         # Create and display the "Game Over" label
         self._lgameover = tkinter.Label(self, text="You died lol!" if not success else "Congratulations you deactivated the bomb!", fg="red", font=("Courier New", 30, "bold"))
         self._lgameover.grid(row=0, column=1, pady=20)
+        
+        # Stop the timer sound if it's still playing
+        self.timer_sound.stop()
 
         # reconfigure the GUI
         # the retry button
