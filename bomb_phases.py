@@ -117,7 +117,7 @@ class Lcd(Frame):
             self._bquit.destroy()
             
         # Create and display the "Game Over" label
-        self._lgameover = tkinter.Label(self, text="You died lol!" if not success else "Congratulations you deactivated the bomb!", fg="red", font=("Courier New", 30, "bold"))
+        self._lgameover = tkinter.Label(self, text="Bomb Exploded." if not success else "DEFUSED!", fg="red", font=("Courier New", 30, "bold"))
         self._lgameover.grid(row=0, column=1, pady=20)
         
         # Stop the timer sound if it's still playing
@@ -396,7 +396,6 @@ class Toggles(PhaseThread):
             # Check if the toggle value matches the target
             if self._value == self._target:
                 self._defused = True
-                self._running = False
             sleep(0.1)
 
         # the toggle switches state as a string
