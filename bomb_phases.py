@@ -120,9 +120,10 @@ class Lcd(Frame):
         self._lgameover = tkinter.Label(self, text="Bomb Exploded." if not success else "DEFUSED!", fg="red", font=("Courier New", 30, "bold"))
         self._lgameover.grid(row=0, column=1, pady=20)
         
-        # Stop all sounds when game ends
-        self.timer.stop()  # Stop the timer sound if it's still playing
-        self.final_countdown_alarm.stop()  # Stop the countdown alarm sound if it's playing
+        # Stop ticking sounds when game ends
+        if self._timer:
+            self._timer.timer_sound.stop()  # Stop the timer sound if it's still playing
+            self._timer.final_countdown_alarm.stop()  # Stop the countdown alarm sound if it's playing
 
         # reconfigure the GUI
         # the retry button
@@ -133,9 +134,9 @@ class Lcd(Frame):
         self._bquit.grid(row=1, column=2, pady=40)
        
         if success:
-            self.win_applause.play()  # Play applause when successfully defused
+            self_timer.win_applause.play()  # Play applause when successfully defused
         else:
-            self.lose_explosion.play()  # Play explosion sound when failed
+            self_timer.lose_explosion.play()  # Play explosion sound when failed
 
     # re-attempts the bomb (after an explosion or a successful defusion)
     def retry(self):
