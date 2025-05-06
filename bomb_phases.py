@@ -120,8 +120,9 @@ class Lcd(Frame):
         self._lgameover = tkinter.Label(self, text="Bomb Exploded." if not success else "DEFUSED!", fg="red", font=("Courier New", 30, "bold"))
         self._lgameover.grid(row=0, column=1, pady=20)
         
-        # Stop the timer sound if it's still playing
-        self.timer_sound.stop()
+        # Stop all sounds when game ends
+        self.timer.stop()  # Stop the timer sound if it's still playing
+        self.final_countdown_alarm.stop()  # Stop the countdown alarm sound if it's playing
 
         # reconfigure the GUI
         # the retry button
